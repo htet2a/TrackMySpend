@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# Environment variables and secrets
+.env
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Personal receipt data
+receipts/
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.heic
+
+# Generated reports
+reports/
+*.xlsx
+
+# Logs
+logs/
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
