@@ -1,0 +1,233 @@
+# TrackMySpend Spending Categories
+# Add or modify categories here without changing Python code
+
+
+categories:
+
+
+  groceries:
+
+    name: Groceries
+
+    keywords:
+      - food
+      - grocery
+      - supermarket
+      - beverage
+      - dairy
+      - meat
+      - vegetables
+      - fruits
+
+    examples:
+      - milk
+      - bread
+      - coffee
+      - vegetables
+
+    track_item_code: false
+
+
+
+  clothing:
+
+    name: Clothes
+
+    keywords:
+      - clothing
+      - apparel
+      - fashion
+      - shirt
+      - pants
+      - jacket
+      - dress
+
+    examples:
+      - winter jacket
+      - jeans
+      - t-shirt
+
+    track_item_code: true
+
+
+
+  shoes:
+
+    name: Shoes
+
+    keywords:
+      - shoes
+      - footwear
+      - sneakers
+      - boots
+      - sandals
+
+    examples:
+      - running shoes
+      - winter boots
+
+    track_item_code: true
+
+
+
+  home_furniture:
+
+    name: Home & Furniture
+
+    keywords:
+      - furniture
+      - home
+      - kitchen
+      - storage
+      - decoration
+
+    examples:
+      - table
+      - chair
+      - shelf
+
+    track_item_code: true
+
+
+
+  ikea:
+
+    name: IKEA Items
+
+    keywords:
+      - ikea
+      - billy
+      - kallax
+      - malm
+      - hemnes
+
+    examples:
+      - IKEA BILLY bookcase
+      - IKEA KALLAX shelf
+
+    track_item_code: true
+
+
+
+  electronics:
+
+    name: Electronics
+
+    keywords:
+      - electronics
+      - computer
+      - phone
+      - laptop
+      - accessories
+
+    examples:
+      - keyboard
+      - monitor
+      - charger
+
+    track_item_code: true
+
+
+
+  health:
+
+    name: Health & Personal Care
+
+    keywords:
+      - pharmacy
+      - medicine
+      - health
+      - personal care
+
+    examples:
+      - vitamins
+      - shampoo
+
+    track_item_code: false
+
+
+
+  transportation:
+
+    name: Transportation
+
+    keywords:
+      - gas
+      - fuel
+      - parking
+      - transit
+      - taxi
+
+    examples:
+      - gasoline
+      - parking fee
+
+    track_item_code: false
+
+
+
+  education:
+
+    name: Education
+
+    keywords:
+      - course
+      - training
+      - book
+      - education
+      - learning
+
+    examples:
+      - online course
+      - textbook
+
+    track_item_code: false
+
+
+
+  subscription:
+
+    name: Subscription & Services
+
+    keywords:
+      - subscription
+      - membership
+      - software
+      - streaming
+
+    examples:
+      - software license
+      - online membership
+
+    track_item_code: false
+
+
+
+  entertainment:
+
+    name: Entertainment
+
+    keywords:
+      - movie
+      - game
+      - music
+      - entertainment
+
+    examples:
+      - cinema ticket
+      - game purchase
+
+    track_item_code: false
+
+
+
+  other:
+
+    name: Other
+
+    keywords: []
+
+    examples:
+      - unknown items
+
+    track_item_code: false

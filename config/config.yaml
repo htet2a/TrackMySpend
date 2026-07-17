@@ -1,0 +1,114 @@
+# TrackMySpend Main Configuration
+# Modify settings here instead of changing Python code
+
+
+# Application Settings
+application:
+  name: TrackMySpend
+  version: "0.1.0"
+
+
+# Currency Configuration
+currency:
+
+  # Currency used for monthly/yearly reporting totals
+  default_reporting_currency: CAD
+
+  # Currencies that can appear in receipts
+  supported_currencies:
+    - CAD
+    - USD
+    - EUR
+    - GBP
+
+  calculation:
+
+    # Use actual bank/card charged amount when available
+    # Example:
+    # Receipt: USD 100
+    # Credit card charged: CAD 142.50
+    # Report total uses CAD 142.50
+    use_actual_payment_amount: true
+
+    # If no payment amount is available,
+    # use receipt amount as reporting amount
+    fallback_to_receipt_amount_if_payment_missing: true
+
+
+# Folder Configuration
+folders:
+
+  # New receipts waiting for processing
+  incoming_receipts: receipts/incoming
+
+  # Successfully processed receipts
+  processed_receipts: receipts/processed
+
+  # Long-term receipt storage
+  archive_receipts: receipts/archive
+
+  # Failed processing receipts
+  error_receipts: receipts/error
+
+  # Generated Excel reports
+  reports: reports/Excel
+
+
+# Database Configuration
+database:
+
+  # SQLite database location
+  file: data/trackmyspend.db
+
+
+# AI Configuration
+# Provider can be changed in the future
+# Examples:
+# gemini
+# ollama
+
+ai:
+
+  provider: gemini
+
+  privacy:
+
+    # Information allowed for AI processing
+    send_store_name: true
+    send_items: true
+    send_prices: true
+
+    # Sensitive information should never be sent
+    send_payment_details: false
+    send_customer_information: false
+
+
+# Excel Report Configuration
+
+excel:
+
+  # One Excel workbook per year
+  yearly_workbook: true
+
+  # One worksheet per month
+  monthly_tabs: true
+
+  # Example:
+  # TrackMySpend_2026.xlsx
+  filename_prefix: TrackMySpend
+
+
+# Receipt Processing Configuration
+
+receipt_processing:
+
+  # Prevent processing the same receipt twice
+  duplicate_detection: true
+
+  # Supported receipt formats
+  supported_formats:
+
+    - jpg
+    - jpeg
+    - png
+    - pdf

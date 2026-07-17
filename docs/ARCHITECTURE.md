@@ -1,286 +1,660 @@
-\# TrackMySpend Architecture
+# TrackMySpend Architecture
 
 
 
-\## Purpose
+## 1. Architecture Overview
 
 
 
-This document describes the technical design of TrackMySpend.
+TrackMySpend is a personal expense tracking application that converts receipt images and PDF files into structured spending records.
 
 
 
-The goal is to keep the application secure, modular, maintainable, and easy to extend.
+The application workflow:
 
 
 
-\---
+```text
 
+Receipt Image/PDF
 
+        |
 
-\# System Overview
+        v
 
+Receipt Processing
 
+        |
 
-TrackMySpend converts receipt documents into structured spending information.
+        v
 
+AI Information Extraction
 
+        |
 
-High-level workflow:
+        v
 
+Standard Expense Data Model
 
+        |
 
-Receipt
-
-|
-
-v
-
-File Processing
-
-|
-
-v
-
-AI Extraction
-
-|
-
-v
-
-Data Validation
-
-|
-
-v
+        v
 
 SQLite Database
 
-|
+        |
 
-v
+        v
 
-Excel Reports
+Excel Report Generator
 
+```
 
 
-\---
 
+The design goal is:
 
 
-\# Design Principles
 
+- Simple to use
 
+- Easy to modify
 
-\## Privacy First
+- Secure
 
+- Low resource usage
 
+- Accurate expense tracking
 
-\- User selects which receipts are processed.
 
-\- No computer-wide scanning.
 
-\- No email access.
 
-\- Data remains local.
 
+---
 
 
-\## Separation of Responsibilities
 
+# 2. Technology Architecture
 
 
-Each module has a specific purpose:
 
+## Programming Language
 
 
-\- Receipt module handles receipt workflow.
 
-\- AI module extracts information.
+Python 3.13
 
-\- Database module stores data.
 
-\- Excel module creates reports.
 
+## Local Database
 
 
-\## Configuration Driven
 
+SQLite
 
 
-Settings should be changed through configuration files instead of source code.
 
+Purpose:
 
 
-Examples:
 
+- Store extracted receipt information
 
+- Track processed receipts
 
-\- Categories
+- Prevent duplicate processing
 
-\- Folder locations
 
-\- AI settings
 
-\- Report settings
+## Data Processing
 
 
 
-\---
+Libraries:
 
 
 
-\# Main Components
+- pandas
 
+- openpyxl
 
 
-\## Receipt Processing
 
+Purpose:
 
 
-Responsible for:
 
+- Create and update Excel reports
 
+- Calculate summaries
 
-\- Reading images
 
-\- Reading PDFs
 
-\- Validating files
+## Receipt Processing
 
-\- Moving processed files
 
 
+Libraries:
 
-\---
 
 
+- PyMuPDF
 
-\## AI Processing
 
 
+Purpose:
 
-Responsible for:
 
 
+- Read PDF receipts
 
-\- Sending receipt information to AI
 
-\- Receiving structured output
 
-\- Extracting purchase details
+- Pillow
 
 
 
-\---
+Purpose:
 
 
 
-\## Database
+- Process receipt images
 
 
 
-SQLite stores:
 
 
+## AI Extraction
 
-\- Receipts
 
-\- Stores
 
-\- Items
+Initial provider:
 
-\- Categories
 
-\- Discounts
 
-\- Loyalty points
+Google Gemini API
 
 
 
-\---
+Purpose:
 
 
 
-\## Reporting
+- Extract receipt information
 
+- Identify purchased items
 
+- Assist categorization
 
-Excel generation provides:
 
 
+The AI layer is designed to be replaceable in the future.
 
-\- Monthly reports
 
-\- Yearly summaries
 
-\- Spending analysis
 
 
+---
 
-\---
 
 
+# 3. Receipt Processing Workflow
 
-\# Data Flow
 
 
+Weekly workflow:
 
-User
 
 
+## Step 1
 
-|
 
 
+User uploads receipts into:
 
-Receipt File
 
 
+`receipts/incoming`
 
-|
 
 
+Supported formats:
 
-TrackMySpend
 
 
+- JPG
 
-|
+- JPEG
 
+- PNG
 
+- PDF
 
-SQLite Database
 
 
 
-|
 
+## Step 2
 
 
-Excel Report
 
+Application processes each receipt one at a time.
 
 
-\---
 
+Information extracted:
 
 
-\# Future Expansion
 
+- Date
 
+- Time
 
-Possible future modules:
+- Store name
 
+- Receipt number
 
+- Item code
 
-\- Budget tracking
+- Item description
 
-\- Price history
+- Category
 
-\- Shopping assistant
+- Quantity
 
-\- Barcode lookup
+- Unit price
 
-\- Mobile application
+- Discount
+
+- Currency
+
+- Amount
+
+- Loyalty points
+
+
+
+
+
+If information cannot be found:
+
+
+
+
+
+N/A
+
+
+
+
+
+is stored.
+
+
+
+
+
+## Step 3
+
+
+
+Processed information is saved into SQLite.
+
+
+
+
+
+## Step 4
+
+
+
+Excel workbook is updated.
+
+
+
+
+
+## Step 5
+
+
+
+Processed receipts are moved:
+
+
+
+
+
+`receipts/processed`
+
+
+
+
+
+Failed receipts are moved:
+
+
+
+
+
+`receipts/error`
+
+
+
+
+
+
+
+---
+
+
+
+# 4. Standard Excel Design
+
+
+
+The application uses one Excel workbook per year.
+
+
+
+Example:
+
+
+
+
+
+`TrackMySpend_2026.xlsx`
+
+
+
+
+
+Workbook sheets:
+
+
+
+```text
+
+January
+
+February
+
+March
+
+...
+
+December
+
+Summary
+
+```
+
+
+
+Each month contains item-level records.
+
+
+
+Example:
+
+
+
+| Date | Store | Item | Category | Currency | Amount |
+
+|---|---|---|---|---|---|
+
+|2026-07-17|IKEA|Shelf|Home|CAD|80|
+
+
+
+
+
+The application appends new receipts instead of recreating the file.
+
+
+
+
+
+---
+
+
+
+# 5. Currency Handling
+
+
+
+The application supports multiple currencies.
+
+
+
+Rules:
+
+
+
+- Keep original receipt currency.
+
+- Do not combine different currencies.
+
+- Calculate totals separately.
+
+
+
+Example:
+
+
+
+
+
+CAD Total: 850.00
+
+
+
+USD Total: 120.00
+
+
+
+
+
+No currency conversion is required.
+
+
+
+If a receipt provides both transaction currency and charged currency:
+
+
+
+Example:
+
+
+
+Receipt:
+
+USD 100
+
+
+
+Charged amount:
+
+CAD 142.50
+
+
+
+
+
+The charged amount can be stored as the reporting amount when it is available in the receipt.
+
+
+
+The original receipt currency is kept for reference.
+
+
+
+The application avoids double counting.
+
+
+
+---
+
+
+
+# 6. Summary Calculation
+
+
+
+The system only totals meaningful numeric fields.
+
+
+
+Included:
+
+
+
+- CAD spending
+
+- USD spending
+
+- Discount amount
+
+- Loyalty points earned
+
+- Loyalty points redeemed
+
+- Number of receipts processed
+
+
+
+
+
+Not summed:
+
+
+
+- Item codes
+
+- Unit prices
+
+- Discount percentages
+
+
+
+
+
+Discount percentage is stored per item.
+
+
+
+
+
+---
+
+
+
+# 7. Resource Efficiency Design
+
+
+
+TrackMySpend is designed for normal Windows laptops.
+
+
+
+Design principles:
+
+
+
+- Process one receipt at a time
+
+- Avoid loading all historical records into memory
+
+- Store history in SQLite
+
+- Generate Excel reports from required data only
+
+- Resize large images before AI processing
+
+
+
+
+
+Expected impact:
+
+
+
+- Low CPU usage
+
+- Low memory usage
+
+- Suitable for weekly receipt processing
+
+
+
+
+
+---
+
+
+
+# 8. Security Design
+
+
+
+Security principles:
+
+
+
+- User manually selects receipts
+
+- No email integration
+
+- No access to unrelated folders
+
+- No scanning of personal files
+
+- Data stored locally
+
+
+
+
+
+The application does not collect:
+
+
+
+- Passwords
+
+- Credit card numbers
+
+- Banking information
+
+
+
+
+
+Only receipt information required for expense tracking is processed.
+
+
+
+
+
+---
+
+
+
+# 9. Future Improvements
+
+
+
+Possible future features:
+
+
+
+- Local AI processing
+
+- Better product recognition
+
+- Product history search
+
+- Loyalty program dashboard
+
+- Secure mobile receipt upload
+
+- Spending analytics dashboard
 
