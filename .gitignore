@@ -5,29 +5,32 @@ __pycache__/
 .venv/
 venv/
 
-# Environment variables and secrets
+# Environment variables
 .env
 
-# Database
+# Databases
 *.db
 *.sqlite
 *.sqlite3
 
 # Personal receipt data
 receipts/
-*.pdf
-*.jpg
-*.jpeg
-*.png
-*.heic
 
 # Generated reports
 reports/
-*.xlsx
 
 # Logs
 logs/
 *.log
+
+# Python caches
+.pytest_cache/
+.mypy_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
 
 # IDE files
 .vscode/
