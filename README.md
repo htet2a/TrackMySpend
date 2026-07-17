@@ -162,35 +162,27 @@ Examples:
 
 # Technology Used
 
+Programming Language: Python
 
+AI Processing: Google Gemini API
 
-| Component              | Technology        |
+Database: SQLite
 
-| ---------------------- | ----------------- |
+Reporting: Microsoft Excel
 
-| Programming Language   | Python            |
+Excel Processing: pandas, openpyxl
 
-| AI Processing          | Google Gemini API |
+PDF Processing: PyMuPDF
 
-| Database               | SQLite            |
+Image Processing: Pillow
 
-| Reporting              | Microsoft Excel   |
+Configuration: YAML
 
-| Excel Processing       | pandas, openpyxl  |
+Environment Management: python-dotenv
 
-| PDF Processing         | PyMuPDF           |
+Version Control: Git
 
-| Image Processing       | Pillow            |
-
-| Configuration          | YAML              |
-
-| Environment Management | python-dotenv     |
-
-| Version Control        | Git               |
-
-| Repository             | GitHub            |
-
-
+Repository: GitHub
 
 ---
 
@@ -272,93 +264,51 @@ This project demonstrates:
 
 
 
-# Project Structure
-
-
+## Project Structure
 
 ```text
-
 TrackMySpend/
-
-
-
+│
 ├── app/
-
 │   ├── ai/
-
 │   ├── database/
-
 │   ├── excel/
-
 │   ├── image/
-
 │   ├── pdf/
-
 │   ├── receipt/
-
 │   └── utils/
-
-
-
+│
 ├── config/
-
 │   ├── config.yaml
-
 │   ├── categories.yaml
-
 │   └── stores.yaml
-
-
-
+│
 ├── data/
-
 │   └── trackmyspend.db
-
-
-
+│
 ├── receipts/
-
 │   ├── incoming/
-
 │   ├── processed/
-
 │   ├── archive/
-
 │   └── error/
-
-
-
+│
 ├── reports/
-
 │   └── Excel/
-
-
-
+│
 ├── logs/
-
-
-
+│
 ├── tests/
-
-
-
+│
 ├── docs/
-
 │   ├── ARCHITECTURE.md
-
 │   └── CHANGELOG.md
-
-
-
+│
 ├── .env
-
 ├── .gitignore
-
 ├── requirements.txt
-
 └── README.md
-
 ```
+Runtime folders such as receipts, reports, logs, and database files are created locally and excluded from Git tracking.
 
 
 
