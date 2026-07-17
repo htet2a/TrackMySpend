@@ -1,0 +1,20 @@
+# Data processing
+pandas
+
+# Excel generation
+openpyxl
+
+# PDF receipt processing
+PyMuPDF
+
+# Image receipt processing
+Pillow
+
+# Configuration files
+PyYAML
+
+# Environment variables
+python-dotenv
+
+# Google Gemini AI
+google-genai
