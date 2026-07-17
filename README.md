@@ -1,8 +1,8 @@
-\# TrackMySpend
+# TrackMySpend
 
 
 
-\## AI-powered Personal Spending Intelligence Assistant
+## AI-powered Personal Spending Intelligence Assistant
 
 
 
@@ -18,47 +18,47 @@ The goal is simple:
 
 
 
-\*\*Turn everyday receipts into useful personal spending intelligence.\*\*
+--Turn everyday receipts into useful personal spending intelligence.--
 
 
 
-\---
+---
 
 
 
-\# Table of Contents
+# Table of Contents
 
 
 
-1\. \[Project Overview](#project-overview)
+1. [Project Overview](#project-overview)
 
-2\. \[Technology Used](#technology-used)
+2. [Technology Used](#technology-used)
 
-3\. \[Technical Concepts](#technical-concepts)
+3. [Technical Concepts](#technical-concepts)
 
-4\. \[Project Structure](#project-structure)
+4. [Project Structure](#project-structure)
 
-5\. \[Project Architecture](#project-architecture)
+5. [Project Architecture](#project-architecture)
 
-6\. \[Implementation Steps](#implementation-steps)
+6. [Implementation Steps](#implementation-steps)
 
-7\. \[Key Takeaways](#key-takeaways)
+7. [Key Takeaways](#key-takeaways)
 
-8\. \[Conclusion](#conclusion)
+8. [Conclusion](#conclusion)
 
-9\. \[Author](#author)
-
-
-
-\---
+9. [Author](#author)
 
 
 
-\# Project Overview
+---
 
 
 
-\## Project Description
+# Project Overview
+
+
+
+## Project Description
 
 
 
@@ -69,64 +69,64 @@ TrackMySpend processes receipt files provided by the user and extracts useful in
 Supported inputs:
 
 
+```txt
+- Receipt images (JPG, PNG, HEIC)
 
-\* Receipt images (JPG, PNG, HEIC)
-
-\* PDF receipts from online purchases
-
+- PDF receipts from online purchases
+```
 
 
 The application extracts:
 
 
 
-\### Receipt Information
+### Receipt Information
 
 
 
-\* Date
+- Date
 
-\* Time
+- Time
 
-\* Store name
+- Store name
 
-\* Receipt number
+- Receipt number
 
-\* Currency
+- Currency
 
-\* Tax
+- Tax
 
-\* Discount amount
+- Discount amount
 
-\* Discount percentage
+- Discount percentage
 
-\* Total amount
-
-
-
-\### Item Information
+- Total amount
 
 
 
-\* Item name
-
-\* Brand
-
-\* Item code / SKU / UPC (when available)
-
-\* Category
-
-\* Quantity
-
-\* Unit price
-
-\* Discount percentage
-
-\* Final price
+### Item Information
 
 
 
-\### Reward Information
+- Item name
+
+- Brand
+
+- Item code / SKU / UPC (when available)
+
+- Category
+
+- Quantity
+
+- Unit price
+
+- Discount percentage
+
+- Final price
+
+
+
+### Reward Information
 
 
 
@@ -134,13 +134,13 @@ When available:
 
 
 
-\* Loyalty program
+- Loyalty program
 
-\* Points earned
+- Points earned
 
-\* Points redeemed
+- Points redeemed
 
-\* Reward value
+- Reward value
 
 
 
@@ -148,19 +148,19 @@ Examples:
 
 
 
-\* Grocery reward programs
+- Grocery reward programs
 
-\* Store membership points
+- Store membership points
 
-\* Promotional discounts
-
-
-
-\---
+- Promotional discounts
 
 
 
-\# Technology Used
+---
+
+
+
+# Technology Used
 
 
 
@@ -192,11 +192,11 @@ Examples:
 
 
 
-\---
+---
 
 
 
-\# Technical Concepts
+# Technical Concepts
 
 
 
@@ -204,75 +204,75 @@ This project demonstrates:
 
 
 
-\## Artificial Intelligence
+## Artificial Intelligence
 
 
 
-\* AI-powered document extraction
+- AI-powered document extraction
 
-\* Structured data generation
+- Structured data generation
 
-\* Receipt understanding
-
-
-
-\## Software Development
+- Receipt understanding
 
 
 
-\* Modular application design
-
-\* Configuration-driven development
-
-\* Error handling
-
-\* Logging
+## Software Development
 
 
 
-\## Database Management
+- Modular application design
+
+- Configuration-driven development
+
+- Error handling
+
+- Logging
 
 
 
-\* SQLite database design
-
-\* Data relationships
-
-\* Historical tracking
+## Database Management
 
 
 
-\## Automation
+- SQLite database design
+
+- Data relationships
+
+- Historical tracking
 
 
 
-\* Automatic receipt processing
-
-\* Report generation
-
-\* Duplicate detection
+## Automation
 
 
 
-\## Security Practices
+- Automatic receipt processing
+
+- Report generation
+
+- Duplicate detection
 
 
 
-\* Local data storage
-
-\* Secret management
-
-\* Restricted file access
-
-\* Privacy-focused design
+## Security Practices
 
 
 
-\---
+- Local data storage
+
+- Secret management
+
+- Restricted file access
+
+- Privacy-focused design
 
 
 
-\# Project Structure
+---
+
+
+
+# Project Structure
 
 
 
@@ -362,11 +362,11 @@ TrackMySpend/
 
 
 
-\---
+---
 
 
 
-\# Project Architecture
+# Project Architecture
 
 
 
@@ -375,88 +375,50 @@ High-level workflow:
 
 
 ```text
-
 Receipt Image / PDF
-
-
-
-&#x20;       |
-
-&#x20;       v
-
-
-
+        |
+        v
 File Validation
-
-
-
-&#x20;       |
-
-&#x20;       v
-
-
-
+        |
+        v
 AI Extraction
-
-
-
-&#x20;       |
-
-&#x20;       v
-
-
-
+        |
+        v
 Data Validation
-
-
-
-&#x20;       |
-
-&#x20;       v
-
-
-
+        |
+        v
 SQLite Database
-
-
-
-&#x20;       |
-
-&#x20;       v
-
-
-
+        |
+        v
 Excel Reports
-
 ```
-
 
 
 Design principles:
 
 
 
-\* SQLite is the main data source.
+- SQLite is the main data source.
 
-\* Excel is generated as a reporting output.
+- Excel is generated as a reporting output.
 
-\* Configuration is separated from application code.
+- Configuration is separated from application code.
 
-\* Personal receipt files remain local.
+- Personal receipt files remain local.
 
-\* Only user-selected receipts are processed.
-
-
-
-\---
+- Only user-selected receipts are processed.
 
 
 
-\# Implementation Steps
+---
 
 
 
-\## Step 1 - Development Environment Setup
+# Implementation Steps
+
+
+
+## Step 1 - Development Environment Setup
 
 
 
@@ -492,11 +454,11 @@ Completed ✅
 
 
 
-\---
+---
 
 
 
-\## Step 2 - Create Project Repository
+## Step 2 - Create Project Repository
 
 
 
@@ -530,11 +492,11 @@ Completed ✅
 
 
 
-\---
+---
 
 
 
-\## Step 3 - Create Project Folder Structure
+## Step 3 - Create Project Folder Structure
 
 
 
@@ -554,11 +516,11 @@ Completed ✅
 
 
 
-\---
+---
 
 
 
-\## Step 4 - Configure Git Protection
+## Step 4 - Configure Git Protection
 
 
 
@@ -574,15 +536,15 @@ Protected files:
 
 
 
-\* API keys
+- API keys
 
-\* Receipt images
+- Receipt images
 
-\* Databases
+- Databases
 
-\* Excel reports
+- Excel reports
 
-\* Logs
+- Logs
 
 
 
@@ -594,91 +556,57 @@ Completed ✅
 
 
 
-\---
+---
 
 
 
-\## Future Steps
+## Completed Steps
+
+### Step 5 - Create Python Virtual Environment
+
+Status:
+
+Completed ✅
 
 
+---
 
-\### Step 5 - Create Python Virtual Environment
+### Step 6 - Install Required Libraries
 
+Status:
 
+Completed ✅
 
-Purpose:
+## Future Steps
 
-
-
-Create an isolated Python environment for project dependencies.
-
-
-
-\### Step 6 - Install Required Libraries
-
-
-
-Purpose:
-
-
-
-Install AI, database, PDF, image, and Excel libraries.
-
-
-
-\### Step 7 - Create Application Configuration
-
-
+### Step 7 - Build Application Configuration Loader
 
 Purpose:
 
+Load YAML configuration files into the application.
 
-
-Create configurable settings.
-
-
-
-\### Step 8 - Create SQLite Database
-
-
+### Step 8 - Create SQLite Database
 
 Purpose:
-
-
 
 Store receipt and transaction history.
 
-
-
-\### Step 9 - Implement Receipt Processing
-
-
+### Step 9 - Implement Receipt Processing
 
 Purpose:
-
-
 
 Extract receipt information from images and PDFs.
 
-
-
-\### Step 10 - Generate Excel Reports
-
-
+### Step 10 - Generate Excel Reports
 
 Purpose:
 
-
-
 Create yearly workbooks and monthly worksheets.
+---
 
 
 
-\---
-
-
-
-\# Key Takeaways
+# Key Takeaways
 
 
 
@@ -690,23 +618,23 @@ Main learning areas:
 
 
 
-\* Applying AI to real-world documents
+- Applying AI to real-world documents
 
-\* Building secure automation tools
+- Building secure automation tools
 
-\* Designing maintainable Python applications
+- Designing maintainable Python applications
 
-\* Managing structured data
+- Managing structured data
 
-\* Creating useful personal analytics
-
-
-
-\---
+- Creating useful personal analytics
 
 
 
-\# Conclusion
+---
+
+
+
+# Conclusion
 
 
 
@@ -718,15 +646,15 @@ The project combines:
 
 
 
-\* Artificial intelligence
+- Artificial intelligence
 
-\* Automation
+- Automation
 
-\* Database management
+- Database management
 
-\* Data visualization
+- Data visualization
 
-\* Privacy-focused software design
+- Privacy-focused software design
 
 
 
@@ -734,15 +662,15 @@ The long-term vision is to create a personal spending assistant that helps users
 
 
 
-\---
+---
 
 
 
-\# Author
+# Author
 
 
 
-\*\*Your Name\*\*
+**Htet Htet**
 
 
 
@@ -754,25 +682,33 @@ TrackMySpend was created as a practical AI automation project focused on solving
 
 
 
-\* AI application development
+- AI application development
 
-\* Python software engineering
+- Python software engineering
 
-\* Personal finance automation
+- Personal finance automation
 
-\* Open-source development practices
-
-
-
-\---
+- Open-source development practices
 
 
 
-\# License
+---
 
 
+
+# Current Status
+
+Version 0.1 - Foundation completed
+
+Completed:
+- Project structure
+- Python environment
+- Dependencies
+- Configuration design
+- Architecture documentation
+
+---
+
+# License
 
 MIT License (planned)
-
-
-
