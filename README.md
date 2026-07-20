@@ -258,7 +258,27 @@ This project demonstrates:
 
 - Privacy-focused design
 
+## Python Module Execution
 
+TrackMySpend is executed using:
+
+python -m app.main
+
+instead of:
+
+python app/main.py
+
+
+Reason:
+
+Using module execution allows Python to understand the application package structure correctly.
+
+Benefits:
+
+- Consistent imports between modules
+- Better package organization
+- Easier testing
+- Matches standard Python application practices
 
 ---
 
@@ -270,13 +290,32 @@ This project demonstrates:
 TrackMySpend/
 │
 ├── app/
+│   │
+│   ├── main.py
+│   │
 │   ├── ai/
+│   │
+│   ├── config/
+│   │   └── config_loader.py
+│   │
 │   ├── database/
+│   │   ├── connection.py
+│   │   ├── init_db.py
+│   │   └── receipt_repository.py
+│   │
 │   ├── excel/
+│   │
 │   ├── image/
+│   │
 │   ├── pdf/
+│   │
 │   ├── receipt/
+│   │   ├── models.py
+│   │   └── processor.py
+│   │
 │   └── utils/
+│       ├── logger.py
+│       └── paths.py
 │
 ├── config/
 │   ├── config.yaml
@@ -298,6 +337,9 @@ TrackMySpend/
 ├── logs/
 │
 ├── tests/
+│   ├── test_database.py
+│   ├── test_receipt_model.py
+│   └── test_receipt_processor.py
 │
 ├── docs/
 │   ├── ARCHITECTURE.md
@@ -306,10 +348,27 @@ TrackMySpend/
 ├── .env
 ├── .gitignore
 ├── requirements.txt
+├── requirements-lock.txt
 └── README.md
 ```
 Runtime folders such as receipts, reports, logs, and database files are created locally and excluded from Git tracking.
 
+Current implementation status:
+
+- Configuration loading completed
+- Application logging completed
+- Project path management completed
+- SQLite database initialization completed
+- Receipt database repository completed
+- Receipt data model completed
+- Receipt file processor completed
+
+Future modules:
+
+- AI extraction
+- Image processing
+- PDF processing
+- Excel report generation
 
 
 ---
@@ -374,10 +433,20 @@ Design principles:
 
 Purpose:
 
+Prepare the development environment for Python application development.
 
+Implementation:
 
-Prepare the development environment.
+- Verified Python installation.
+- Verified Git installation.
+- Verified development tools.
+- Created project workspace.
 
+Development environment:
+
+- Operating system: Windows
+- Python version: 3.13.14
+- Virtual environment: Python venv
 
 
 Commands:
@@ -414,9 +483,18 @@ Completed ✅
 
 Purpose:
 
+Create version control for the TrackMySpend project.
 
+Implementation:
 
-Initialize Git and create the project structure.
+- Initialized Git repository.
+- Created main branch.
+- Connected local repository to GitHub.
+- Published project repository.
+
+Repository:
+
+GitHub: https://github.com/htet2a/TrackMySpend
 
 
 
@@ -452,18 +530,30 @@ Completed ✅
 
 Purpose:
 
+Create a modular application structure.
 
+Implementation:
 
-Create organized folders for application code, data, receipts, reports, and documentation.
+Created separate folders for:
 
+- Application modules
+- Configuration files
+- Database storage
+- Receipt files
+- Reports
+- Documentation
+- Tests
 
+Designed the structure to support future expansion:
+
+- AI extraction
+- Image processing
+- PDF processing
+- Excel reporting
 
 Status:
 
-
-
 Completed ✅
-
 
 
 ---
@@ -476,34 +566,27 @@ Completed ✅
 
 Purpose:
 
+Prevent private receipt data and generated files from being uploaded.
 
+Implementation:
 
-Prevent private information from being uploaded.
+Configured .gitignore to exclude:
 
-
-
-Protected files:
-
-
-
-- API keys
-
-- Receipt images
-
-- Databases
-
+- Environment variables
+- Virtual environments
+- Database files
+- Receipt files
 - Excel reports
-
 - Logs
+- Temporary Python files
 
+Privacy protection:
 
+Personal receipt information remains local.
 
 Status:
 
-
-
 Completed ✅
-
 
 
 ---
@@ -514,6 +597,24 @@ Completed ✅
 
 ### Step 5 - Create Python Virtual Environment
 
+Purpose:
+
+Create an isolated Python environment for project dependencies.
+
+Implementation:
+
+Created virtual environment:
+
+.venv
+
+Activated environment before development.
+
+Benefits:
+
+- Isolated dependencies
+- Reproducible development setup
+- Prevents conflicts with system Python
+
 Status:
 
 Completed ✅
@@ -521,62 +622,187 @@ Completed ✅
 
 ---
 
+
 ### Step 6 - Install Required Libraries
+
+Purpose:
+
+Install libraries required for application development.
+
+Implementation:
+
+Installed:
+
+AI:
+- google-genai
+
+Data processing:
+- pandas
+- openpyxl
+
+File processing:
+- PyMuPDF
+- Pillow
+
+Configuration:
+- PyYAML
+- python-dotenv
+
+Dependency management:
+
+Created:
+
+- requirements.txt
+- requirements-lock.txt
 
 Status:
 
 Completed ✅
 
-## Future Steps
+
+---
+
 
 ### Step 7 - Build Application Configuration Loader
 
 Purpose:
 
-Load YAML configuration files into the application.
+Load YAML configuration files into the application instead of hardcoding settings.
+
+Implementation:
+
+- Created YAML configuration files:
+  - config.yaml
+  - categories.yaml
+  - stores.yaml
+
+- Created configuration loader module:
+  - app/config/config_loader.py
+
+- Application can now read project settings dynamically.
+
+Status:
+
+Completed ✅
+
+
+
+---
+
+
 
 ### Step 8 - Create SQLite Database
 
 Purpose:
 
-Store receipt and transaction history.
+Store receipt and transaction history locally.
+
+Implementation:
+
+- Created SQLite database connection layer:
+  - app/database/connection.py
+
+- Created database initialization module:
+  - app/database/init_db.py
+
+- Created initial receipts table.
+
+- Created repository layer:
+  - app/database/receipt_repository.py
+
+- Database remains the main source of truth.
+- Excel will be generated later as a reporting output.
+
+Status:
+
+Completed ✅
+
+
+
+---
+
+
+
+## Future Steps
 
 ### Step 9 - Implement Receipt Processing
 
 Purpose:
 
-Extract receipt information from images and PDFs.
+Process receipt files and prepare them for AI extraction.
+
+Implementation:
+
+Completed:
+
+- Created receipt data model:
+  - app/receipt/models.py
+
+- Created receipt file processor:
+  - app/receipt/processor.py
+
+- Added receipt file validation:
+  - File existence checking
+  - Supported format checking
+  - File metadata extraction
+
+Supported formats:
+
+- JPG
+- JPEG
+- PNG
+- PDF
+
+Next:
+
+- Image reading
+- PDF text extraction
+- AI extraction
+- Receipt data validation
+
+Status:
+
+In Progress 🟡
 
 ### Step 10 - Generate Excel Reports
 
 Purpose:
 
-Create yearly workbooks and monthly worksheets.
----
+Create Excel reports from stored expense data to help users understand spending patterns.
 
+Planned Implementation:
 
+- Create Excel reporting module:
+  - app/excel/
 
-# Key Takeaways
+- Generate yearly Excel workbooks.
 
+- Create monthly worksheets.
 
+- Use pandas and openpyxl for:
+  - Data export
+  - Worksheet formatting
+  - Summary generation
 
-TrackMySpend demonstrates how modern technologies can solve everyday problems.
+Reports will include:
 
+- Expense history
+- Spending by category
+- Monthly totals
+- Yearly totals
+- Separate currency summaries:
+  - CAD totals
+  - USD totals
 
+Design principles:
 
-Main learning areas:
+- SQLite remains the main data source.
+- Excel is generated only as a reporting output.
+- No financial calculations are stored only in Excel.
 
+Status:
 
-
-- Applying AI to real-world documents
-
-- Building secure automation tools
-
-- Designing maintainable Python applications
-
-- Managing structured data
-
-- Creating useful personal analytics
+Planned 
 
 
 
@@ -588,27 +814,25 @@ Main learning areas:
 
 
 
-TrackMySpend transforms receipts from forgotten documents into valuable personal spending information.
-
-
+TrackMySpend demonstrates how modern technologies can solve everyday personal finance problems by transforming receipts from forgotten documents into valuable spending information.
 
 The project combines:
 
-
-
 - Artificial intelligence
-
-- Automation
-
+- Document processing automation
 - Database management
-
 - Data visualization
-
 - Privacy-focused software design
 
+Through this project, the main learning areas include:
 
+- Applying AI to real-world documents
+- Building secure automation tools
+- Designing maintainable Python applications
+- Managing structured data
+- Creating useful personal analytics
 
-The long-term vision is to create a personal spending assistant that helps users make better financial decisions based on their own purchase history.
+The long-term vision is to create a personal spending assistant that helps users better understand their purchasing behavior and make informed financial decisions based on their own receipt history.
 
 
 
@@ -641,23 +865,8 @@ TrackMySpend was created as a practical AI automation project focused on solving
 - Open-source development practices
 
 
-
 ---
 
-
-
-# Current Status
-
-Version 0.1 - Foundation completed
-
-Completed:
-- Project structure
-- Python environment
-- Dependencies
-- Configuration design
-- Architecture documentation
-
----
 
 # License
 
