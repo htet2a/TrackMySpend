@@ -1,5 +1,5 @@
-from config.config_loader import load_yaml
-from utils.logger import get_logger
+from app.config.config_loader import load_yaml
+from app.utils.logger import get_logger
 
 
 def main():

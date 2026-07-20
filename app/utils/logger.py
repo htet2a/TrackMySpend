@@ -1,9 +1,9 @@
 import logging
-from pathlib import Path
+
+from app.utils.paths import get_project_path
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-LOG_DIRECTORY = PROJECT_ROOT / "logs"
+LOG_DIRECTORY = get_project_path("logs")
 
 
 def get_logger(name: str = "TrackMySpend"):
