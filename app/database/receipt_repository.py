@@ -1,18 +1,10 @@
 from app.database.connection import get_connection
+from app.receipt.models import Receipt
 
 
-def add_receipt(
-    receipt_date,
-    store_name,
-    receipt_number,
-    currency,
-    subtotal,
-    tax,
-    discount,
-    total_amount
-):
+def add_receipt(receipt: Receipt):
     """
-    Insert a receipt into the database.
+    Insert a Receipt object into the database.
     """
 
     connection = get_connection()
@@ -34,17 +26,16 @@ def add_receipt(
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
-            receipt_date,
-            store_name,
-            receipt_number,
-            currency,
-            subtotal,
-            tax,
-            discount,
-            total_amount
+            receipt.receipt_date,
+            receipt.store_name,
+            receipt.receipt_number,
+            receipt.currency,
+            receipt.subtotal,
+            receipt.tax,
+            receipt.discount,
+            receipt.total_amount
         )
     )
 
     connection.commit()
-
     connection.close()
