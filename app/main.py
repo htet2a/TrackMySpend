@@ -1,10 +1,11 @@
+from app.database.init_db import initialize_database
 from app.config.config_loader import load_yaml
 from app.utils.logger import get_logger
 
 
 def main():
     logger = get_logger()
-
+    initialize_database() 
     config = load_yaml("config.yaml")
     categories = load_yaml("categories.yaml")
     stores = load_yaml("stores.yaml")
